@@ -5,7 +5,7 @@ import { App as TonomyApp} from 'tonomy-id-sdk';
 function App() {
   async function onButtonPress() {
     // change so that redirect is true by default
-    TonomyApp.onPressLogin(true);
+    TonomyApp.onPressLogin({callback: '/callback'});
   }
 
   return (
