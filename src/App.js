@@ -1,22 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import { App as TonomyApp} from 'tonomy-id-sdk';
 
 function App() {
+  async function onButtonPress() {
+    // change so that redirect is true by default
+    TonomyApp.onPressLogin(true);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          market.com (localhost:3001)
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={onButtonPress}>Login with Tonomy ID</button>
       </header>
     </div>
   );
