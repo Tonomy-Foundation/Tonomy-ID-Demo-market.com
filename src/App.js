@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import { App as TonomyApp} from 'tonomy-id-sdk';
+import './tonomy.css';
 
 function App() {
   async function onButtonPress() {
@@ -14,7 +15,7 @@ function App() {
         <p>
           market.com (localhost:3001)
         </p>
-        <button onClick={onButtonPress}>Login with Tonomy ID</button>
+        <button className="tonomy" onClick={onButtonPress}>Login with Tonomy ID</button>
       </header>
     </div>
   );
