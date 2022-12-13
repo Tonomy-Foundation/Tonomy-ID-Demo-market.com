@@ -2,7 +2,7 @@
 
 A reactjs application allowing users to log into their Tonomy ID account.
 
-## Dependancies
+## Dependencies
 
 - Linux debian distribution (Ubuntu 20.0.4 LTS used)
 - [Nodejs](https://nodejs.org) v16.4.1+ suggested installed with [nvm](https://github.com/nvm-sh/nvm)
@@ -39,3 +39,14 @@ Linting is done with `eslint`. Install the recommended VS Code plugin to see mar
 ```bash
 npm run lint
 ```
+
+### Configuration and environment variables
+
+Set the configuration variables in the desired file in `./src/config`
+
+Config file is choosing based on the value of environment variable `NODE_ENV`. `config.json` is used by default.
+
+Other environment variables override the values in the config file:
+
+- REACT_APP_BLOCKCHAIN_URL
+- REACT_APP_SSO_WEBSITE_ORIGIN

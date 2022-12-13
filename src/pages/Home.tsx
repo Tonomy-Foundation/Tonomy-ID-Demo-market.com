@@ -19,12 +19,12 @@ function Home() {
     async function onButtonPress() {
         setSettings({ ssoWebsiteOrigin: settings.config.ssoWebsiteOrigin });
 
-        TonomyApp.onPressLogin({ callbackPath: '/callback', redirect: false });
+        TonomyApp.onPressLogin({ callbackPath: '/callback' });
     }
 
     return (
         <div style={styles.container}>
-            <p>market.com (localhost:3001)</p>
+            <p>market.com</p>
             <button className="tonomy" onClick={onButtonPress}>
                 Login with Tonomy ID
             </button>
