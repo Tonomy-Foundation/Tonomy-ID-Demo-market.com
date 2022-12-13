@@ -1,10 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import { App as TonomyApp} from 'tonomy-id-sdk';
+import { App as TonomyApp, setSettings} from 'tonomy-id-sdk';
 import './tonomy.css';
+import settings from './settings';
 
 function App() {
   async function onButtonPress() {
+    setSettings({ssoWebsiteOrigin: settings.config.ssoWebsiteOrigin});
+    
     TonomyApp.onPressLogin({callback: '/callback'});
   }
 
