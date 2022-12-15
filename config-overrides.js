@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const { aliasDangerous } = require('react-app-rewire-alias/lib/aliasDangerous');
-const WatchExternalFilesPlugin = require('webpack-watch-files-plugin');
 
 module.exports = function override(config, env) {
     //do stuff with the webpack config...
