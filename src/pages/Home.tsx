@@ -26,7 +26,7 @@ function Home() {
         <div style={styles.container}>
             <p>market.com</p>
             <button className="tonomy" onClick={onButtonPress}>
-                Login with Tonomy ID
+                Login with {settings.config.appName}
             </button>
         </div>
     );
