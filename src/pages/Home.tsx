@@ -1,6 +1,4 @@
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import { UserApps, setSettings } from 'tonomy-id-sdk';
 import settings from '../settings';
 import './tonomy.css';
