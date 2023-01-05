@@ -1,5 +1,7 @@
 import React from 'react';
-import { App as TonomyApp, setSettings } from 'tonomy-id-sdk';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { UserApps, setSettings } from 'tonomy-id-sdk';
 import settings from '../settings';
 import './tonomy.css';
 
@@ -19,12 +21,12 @@ function Home() {
     async function onButtonPress() {
         setSettings({ ssoWebsiteOrigin: settings.config.ssoWebsiteOrigin });
 
-        TonomyApp.onPressLogin({ callbackPath: '/callback' });
+        UserApps.onPressLogin({ callbackPath: '/callback' });
     }
 
     return (
         <div style={styles.container}>
-            <p>market.com</p>
+            <img src={'market.com.png'} />
             <button className="tonomy" onClick={onButtonPress}>
                 Login with {settings.config.appName}
             </button>
