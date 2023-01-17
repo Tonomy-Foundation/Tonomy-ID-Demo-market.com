@@ -8,12 +8,13 @@ import './callback.css';
 export default function CallBackPage() {
     const [payload, setPayLoad] = useState<JWTLoginPayload>();
     const [name, setName] = useState<string>();
+    const [username, setUsername] = useState<string>();
     useEffect(() => {
         verifyLogin();
     }, []);
 
     async function verifyLogin() {
-        const { result, accountName } = await UserApps.onAppRedirectVerifyRequests();
+        const { result, accountName, username } = await UserApps.onAppRedirectVerifyRequests();
         const verifiedLoginSso = await UserApps.verifyKeyExistsForApp(
             accountName,
             new JsKeyManager() as unknown as KeyManager
@@ -22,6 +23,7 @@ export default function CallBackPage() {
             setPayLoad(result[0].payload as JWTLoginPayload);
         }
         setName(accountName);
+        setUsername(JSON.parse(username).username);
     }
 
     const showJwt = () => {
@@ -32,6 +34,7 @@ export default function CallBackPage() {
                 <div>
                     <h1>Logged in</h1>
                     <h2>Account: {name}</h2>
+                    <h3>Username: {username}</h3>
                     <div className="code">
                         <span className="braces">&#123;</span>
                         {Object.entries(payload).map(([key, value], index: number) => {
