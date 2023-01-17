@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { JWTLoginPayload } from 'tonomy-id-sdk';
-import { SdkErrors, throwError, UserApps } from 'tonomy-id-sdk';
+import { JWTLoginPayload, KeyManager } from 'tonomy-id-sdk';
+import { UserApps } from 'tonomy-id-sdk';
+import JsKeyManager from '../keymanager';
 import settings from '../settings';
 import './callback.css';
 
@@ -8,23 +9,21 @@ export default function CallBackPage() {
     const [payload, setPayLoad] = useState<JWTLoginPayload>();
     const [name, setName] = useState<string>();
     useEffect(() => {
-        const params = new URLSearchParams(window.location.search);
-        const accountName = params.get('accountName');
-        const jwt = params.get('request');
-
-        if (!accountName) throwError("accountName parameter doesn't exists", SdkErrors.MissingParams);
-        if (!jwt) throwError("request parameter doesn't exists", SdkErrors.MissingParams);
-        verifyLogin(accountName, jwt);
-        setName(accountName);
+        verifyLogin();
     }, []);
 
-    async function verifyLogin(accountName: string, jwt: string) {
-        const verifiedJWT = await UserApps.verifyLoginJWT(jwt);
-        const verifiedLoginSso = await UserApps.verifyPrivateKey(accountName);
-        console.log(verifiedLoginSso);
-        if (verifiedLoginSso && verifiedJWT) {
-            setPayLoad(verifiedJWT.payload as JWTLoginPayload);
+    async function verifyLogin() {
+        const { result, accountName } = await UserApps.onAppRedirectVerifyRequests();
+        const verifiedLoginSso = await UserApps.verifyKeyExistsForApp(
+            accountName,
+            new JsKeyManager() as unknown as KeyManager
+        );
+        console.log('test');
+        if (verifiedLoginSso && result) {
+            console.log('test');
+            setPayLoad(result[0].payload as JWTLoginPayload);
         }
+        setName(accountName);
     }
 
     const showJwt = () => {
@@ -37,9 +36,9 @@ export default function CallBackPage() {
                     <h2>Account: {name}</h2>
                     <div className="code">
                         <span className="braces">&#123;</span>
-                        {Object.entries(payload).map(([key, value]) => {
+                        {Object.entries(payload).map(([key, value], index: number) => {
                             return (
-                                <div className="code-line">
+                                <div className="code-line" key={index}>
                                     <div className="key">{key}:&nbsp;</div>
                                     <div className="value">"{value}"</div>
                                 </div>
