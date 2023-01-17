@@ -1,5 +1,6 @@
 import React from 'react';
-import { UserApps, setSettings } from 'tonomy-id-sdk';
+import { UserApps, setSettings, KeyManager } from 'tonomy-id-sdk';
+import JsKeyManager from '../keymanager';
 import settings from '../settings';
 import './tonomy.css';
 
@@ -18,8 +19,7 @@ const styles = {
 function Home() {
     async function onButtonPress() {
         setSettings({ ssoWebsiteOrigin: settings.config.ssoWebsiteOrigin });
-
-        UserApps.onPressLogin({ callbackPath: '/callback' });
+        UserApps.onPressLogin({ callbackPath: '/callback' }, new JsKeyManager() as unknown as KeyManager);
     }
 
     return (
