@@ -18,9 +18,7 @@ export default function CallBackPage() {
             accountName,
             new JsKeyManager() as unknown as KeyManager
         );
-        console.log('test');
         if (verifiedLoginSso && result) {
-            console.log('test');
             setPayLoad(result[0].payload as JWTLoginPayload);
         }
         setName(accountName);
