@@ -2,6 +2,10 @@
 
 A reactjs application allowing users to log into their Tonomy ID account.
 
+## Staging
+
+<https://tonomy-id-market-com-staging.tonomy.foundation>
+
 ## Dependencies
 
 - Linux debian distribution (Ubuntu 20.0.4 LTS used)
