@@ -8,20 +8,14 @@ export default class JsKeyManager implements KeyManager {
         const pv = localStorage.getItem('app.' + options.level);
 
         if (!pv) throw new Error('No key for this level');
-
-        
         const privateKey = PrivateKey.from(pv);
-        console.log(privateKey);
-        
+        console.log('publickey from private',privateKey.toPublic().toString())
         
         if (options.outputType === 'jwt') {
             
-            
             if (typeof options.data !== 'string') throw new Error('data must be a string');
-            console.log('pkkkkkkkkkk',privateKey.toString());
             
             const signer = ES256KSigner(privateKey.data.array, true);
-            console.log('reachhed');
             
             return (await signer(options.data)) as string;
             
