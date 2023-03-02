@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { JWTLoginPayload, KeyManager } from 'tonomy-id-sdk';
-import { UserApps } from 'tonomy-id-sdk';
+import { JWTLoginPayload, KeyManager, UserApps } from '@tonomy/tonomy-id-sdk';
+
 import JsKeyManager from '../keymanager';
 import settings from '../settings';
 import './callback.css';
@@ -19,7 +19,7 @@ export default function CallBackPage() {
             new JsKeyManager() as unknown as KeyManager
         );
         if (verifiedLoginSso && result) {
-            setPayLoad(result[0].payload as JWTLoginPayload);
+            setPayLoad(result[0].getPayload() as JWTLoginPayload);
         }
         setName(accountName);
     }
