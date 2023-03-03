@@ -5,10 +5,10 @@ export default class JsKeyManager implements KeyManager {
     async signData(options: SignDataOptions): Promise<string | Signature> {
   
         
-        const pv = localStorage.getItem('app.' + options.level);
+        const strPrivateKey = localStorage.getItem('tonomy.id.app' + options.level);
 
-        if (!pv) throw new Error('No key for this level');
-        const privateKey = PrivateKey.from(pv);
+        if (!strPrivateKey) throw new Error('No key for this level');
+        const privateKey = PrivateKey.from(strPrivateKey);
         console.log('publickey from private',privateKey.toPublic().toString())
         
         if (options.outputType === 'jwt') {
@@ -44,32 +44,32 @@ export default class JsKeyManager implements KeyManager {
     }
     async storeKey(options: StoreKeyOptions): Promise<PublicKey> {
         if (options.level === KeyManagerLevel.BROWSERLOCALSTORAGE) {
-            localStorage.setItem('app.' + options.level, options.privateKey.toString());
+            localStorage.setItem('tonomy.id.app' + options.level, options.privateKey.toString());
             return options.privateKey.toPublic();
         }
 
-        sessionStorage.setItem('app.' + options.level, options.privateKey.toString());
+        sessionStorage.setItem('tonomy.id.app' + options.level, options.privateKey.toString());
         return options.privateKey.toPublic();
     }
 
     async getKey(options: GetKeyOptions): Promise<PublicKey | null> {
         if (options.level === KeyManagerLevel.BROWSERLOCALSTORAGE) {
-            const pv = localStorage.getItem('app.' + options.level);
+            const pv = localStorage.getItem('tonomy.id.app' + options.level);
             if (!pv) throw new Error('no key found');
             return PrivateKey.from(pv).toPublic();
         }
 
-        const pv = sessionStorage.getItem('app.' + options.level);
+        const pv = sessionStorage.getItem('tonomy.id.app' + options.level);
         if (!pv) throw new Error('no key found');
         return PrivateKey.from(pv).toPublic();
     }
 
     async removeKey(options: GetKeyOptions): Promise<void> {
         if (options.level === KeyManagerLevel.BROWSERLOCALSTORAGE) {
-            localStorage.removeItem('app.' + options.level);
+            localStorage.removeItem('tonomy.id.app' + options.level);
             return;
         }
-        sessionStorage.removeItem('app.' + options.level);
+        sessionStorage.removeItem('tonomy.id.app' + options.level);
         return;
     }
 }
