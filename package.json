@@ -21,7 +21,7 @@
         "react-dom": "^18.2.0",
         "react-router-dom": "^6.6.2",
         "react-scripts": "5.0.1",
-        "tonomy-id-sdk": "github:Tonomy-Foundation/Tonomy-ID-SDK#development",
+        "@tonomy/tonomy-id-sdk": "github:Tonomy-Foundation/Tonomy-ID-SDK#development",
         "typescript": "^4.7.4",
         "web-vitals": "^2.1.4"
     },
